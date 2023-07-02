@@ -67,6 +67,7 @@ const Dnd = () => {
   ]);
 
   const moveCard = useCallback((dragIndex: number, hoverIndex: number) => {
+    console.log('dragIndex: ', dragIndex);
     setList((prevCards: ChartItem[]) =>
       update(prevCards, {
         $splice: [

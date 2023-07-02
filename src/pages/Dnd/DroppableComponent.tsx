@@ -1,38 +1,34 @@
-import React from 'react';
 import { useDrop } from 'react-dnd';
 
-const DroppableComponent = ({ onDrop, children, index, moveCard }) => {
-  const [collectedProps, drop] = useDrop({
-    accept: 'component',
-    drop: onDrop,
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      handlerId: monitor.getHandlerId(),
-    }),
-    hover(item: { id: string }, monitor) {
-      const dragIndex = item.id;
-      console.log('dragIndex: ', dragIndex);
-      const hoverIndex = index;
-      console.log('hoverIndex: ', hoverIndex);
+interface DragItem {
+  index: number;
+  id: string;
+  type: string;
+}
 
-      if (dragIndex === hoverIndex) {
-        // eslint-disable-next-line no-useless-return
-        return;
-      }
+const DroppableComponent = ({ index, moveCard, children }) => {
+  const [collectDropProps, drop] = useDrop({
+    accept: 'component',
+    collect(monitor) {
+      return {
+        handlerId: monitor.getHandlerId(),
+        isOver: monitor.isOver(),
+      };
+    },
+    hover(item: DragItem, monitor) {
+      const dragIndex = item.index;
+      const hoverIndex = index;
 
       moveCard(dragIndex, hoverIndex);
-      // eslint-disable-next-line no-param-reassign
-      item.id = hoverIndex;
+
+      item.index = hoverIndex;
     },
   });
-  console.log('collectedProps: ', collectedProps);
-
-
   return (
     <div
       ref={drop}
-      data-handler-id={collectedProps.handlerId}
-      style={{ backgroundColor: collectedProps.isOver ? 'rgba(7, 207, 248,0.1)' : 'transparent', width: 200, height: 200 }}
+      data-handler-id={collectDropProps.handlerId}
+      style={{ backgroundColor: collectDropProps.isOver ? 'rgba(7, 207, 248,0.1)' : 'transparent', height: '100%' }}
     >
       {children}
     </div>

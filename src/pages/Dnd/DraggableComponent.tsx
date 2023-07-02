@@ -1,13 +1,10 @@
 import React from 'react';
-import { useDrag, useDragDropManager } from 'react-dnd';
+import { useDrag } from 'react-dnd';
 
-const DraggableComponent = ({ id, children }) => {
-  // const dragDropManager = useDragDropManager();
-  // const ddmonitor = dragDropManager.getMonitor();
-  // console.log('ddmonitor: ', ddmonitor);
-  const [{ opacity, item }, drag, dragPreview] = useDrag(() => ({
+const DraggableComponent = ({ id, index, children }) => {
+  const [collectDragProps, drag] = useDrag(() => ({
     type: 'component',
-    item: { id },
+    item: { id, index },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.5 : 1,
       item: monitor.getItem(),
@@ -15,14 +12,10 @@ const DraggableComponent = ({ id, children }) => {
   }));
 
   return (
-    <div
-      ref={drag}
-      style={{ opacity, display: 'flex', width: 200, height: 200 }}
-    >
+    <div ref={drag} style={{ opacity: collectDragProps.opacity, height: '100%' }}>
       {children}
     </div>
   );
 };
 
 export default DraggableComponent;
-

@@ -1,0 +1,23 @@
+.container {
+    height: calc(100vh - 120px);
+    width: 100%;
+    background-color: skyblue;
+    display: flex;
+    /* flex: 1; */
+}
+  
+.first {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.second {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+.third {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}

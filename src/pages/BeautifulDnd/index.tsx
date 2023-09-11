@@ -81,26 +81,37 @@ const Dnd = () => {
     }
 
     const newItems = reorder(list, result.source.index, result.destination.index);
+    console.log('newItems: ', newItems);
 
     setList(newItems);
   };
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <div className={styles.container}>
-        <Droppable droppableId="droppable">
+      <div>
+        <Droppable droppableId="dropBoard">
           {(provided) => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
+            <div className={styles.container} ref={provided.innerRef} {...provided.droppableProps}>
               {list && list.length > 0 && (
                 <>
                   <Draggable draggableId={'column0'} index={0}>
-                    {(provided, snapshot) => (
-                      <div className={styles.first} ref={provided.innerRef} {...provided.draggableProps}>
+                    {(columnProvided, snapshot) => (
+                      <div
+                        className={styles.first}
+                        ref={columnProvided.innerRef}
+                        {...columnProvided.draggableProps}
+                        {...columnProvided.dragHandleProps}
+                      >
                         {list.slice(0, 3).map((item, index) => (
                           <div key={index} style={{ flex: index === 0 ? 1 : 2, padding: '20px' }}>
                             <Draggable draggableId={item.id} key={item.id} index={index}>
-                              {(provided) => (
-                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                              {(itemProvided1) => (
+                                <div
+                                  ref={itemProvided1.innerRef}
+                                  {...itemProvided1.draggableProps}
+                                  {...itemProvided1.dragHandleProps}
+                                  style={{ height: '100%' }}
+                                >
                                   {item.component}
                                 </div>
                               )}
@@ -112,13 +123,23 @@ const Dnd = () => {
                   </Draggable>
 
                   <Draggable draggableId={'column1'} index={1}>
-                    {(provided, snapshot) => (
-                      <div className={styles.second} ref={provided.innerRef} {...provided.draggableProps}>
+                    {(columnProvided, snapshot) => (
+                      <div
+                        className={styles.second}
+                        ref={columnProvided.innerRef}
+                        {...columnProvided.draggableProps}
+                        {...columnProvided.dragHandleProps}
+                      >
                         {list.slice(3, 5).map((item, index) => (
                           <div key={index} style={{ flex: 2, padding: '20px' }}>
                             <Draggable draggableId={item.id} key={item.id} index={index}>
-                              {(provided) => (
-                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                              {(itemProvided2) => (
+                                <div
+                                  ref={itemProvided2.innerRef}
+                                  {...itemProvided2.draggableProps}
+                                  {...itemProvided2.dragHandleProps}
+                                  style={{ height: '100%' }}
+                                >
                                   {item.component}
                                 </div>
                               )}
@@ -129,13 +150,23 @@ const Dnd = () => {
                     )}
                   </Draggable>
                   <Draggable draggableId={'column2'} index={2}>
-                    {(provided, snapshot) => (
-                      <div className={styles.third} ref={provided.innerRef} {...provided.draggableProps}>
+                    {(columnProvided, snapshot) => (
+                      <div
+                        className={styles.third}
+                        ref={columnProvided.innerRef}
+                        {...columnProvided.draggableProps}
+                        {...columnProvided.dragHandleProps}
+                      >
                         {list.slice(5, 8).map((item, index) => (
                           <div key={index} style={{ flex: 2, padding: '20px' }}>
                             <Draggable draggableId={item.id} key={item.id} index={index}>
-                              {(provided) => (
-                                <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                              {(itemProvided3) => (
+                                <div
+                                  ref={itemProvided3.innerRef}
+                                  {...itemProvided3.draggableProps}
+                                  {...itemProvided3.dragHandleProps}
+                                  style={{ height: '100%' }}
+                                >
                                   {item.component}
                                 </div>
                               )}

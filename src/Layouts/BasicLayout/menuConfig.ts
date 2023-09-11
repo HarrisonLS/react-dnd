@@ -21,6 +21,16 @@ const asideMenuConfig = [
     path: '/beautifulDnd',
     icon: HeartOutlined,
   },
+  {
+    name: 'DndKit',
+    path: '/dndKit',
+    icon: HeartOutlined,
+  },
+  {
+    name: 'GridLayout',
+    path: '/gridLayout',
+    icon: HeartOutlined,
+  },
 ];
 
 export { asideMenuConfig };
